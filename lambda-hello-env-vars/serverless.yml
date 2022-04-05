@@ -1,0 +1,30 @@
+service: lambda-hello-env-vars
+
+frameworkVersion: '2'
+
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: python3.8
+  lambdaHashingVersion: 20201221
+  region: sa-east-1
+  stage: ${opt:stage}
+
+custom:
+  serverless-offline-ssm:
+    stages:
+      - dev
+    # ssm:
+    #   'MY_VAR': 'Ops'
+
+functions:
+  hello:
+    name: hello-env-vars
+    handler: handler.run
+    # environment:
+    #   MY_VAR: ${ssm:MY_VAR}
+
+plugins:
+  - serverless-offline-ssm
+  - serverless-offline

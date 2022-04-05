@@ -1,0 +1,119 @@
+service: stepFunctions-and-CloudFormation
+
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: sa-east-1
+  memorySize: 128
+  timeout: 60
+  eventBridge:
+    useCloudFormation: true
+
+package:
+  patterns:
+    - "!node_modules/**"
+
+plugins:
+  - serverless-step-functions
+
+functions:
+  hello:
+    name: step-functions-1-lambda-hello
+    handler: lambda-hello.handler            
+  world:
+    name: step-functions-1-lambda-world
+    handler: lambda-world.handler
+
+stepFunctions:
+  validate: true # enable pre-deployment definition validation (disabled by default)
+  stateMachines:
+    hellostepfunc1:
+      name: serverless-state-machine-1
+      definition:
+        Comment: "A Hello World example of the Amazon States Language using an AWS Lambda Function"
+        StartAt: Input 1
+        States:
+          Input 1:
+            Type: Pass
+            Next: BothFunctions
+            Result: 
+              name: "Mr. Jaskonis"
+          BothFunctions:
+            Type: Parallel
+            Next: Final Output 1
+            Branches:
+              - StartAt: wait 10 secs
+                States:
+                  wait 10 secs:
+                    Type: Wait
+                    Seconds: 10
+                    End: true
+              - StartAt: fn1
+                States:
+                  fn1:
+                    Type: Task
+                    Resource: arn:aws:states:::lambda:invoke
+                    Parameters:
+                      Payload.$: $
+                      FunctionName:
+                        Fn::GetAtt: [hello, Arn]
+                    End: true
+            ResultSelector:
+              lambdaResult.$: $.[1]
+          Final Output 1:
+            Type: Pass
+            End: true
+
+
+          # HelloWorld1:
+          #   Type: Task
+          #   Resource: arn:aws:states:::lambda:invoke
+          #   Parameters:
+          #     Payload.$: $ # needed to receive input from previous step
+          #     FunctionName: 
+          #       Fn::GetAtt: [hello, Arn]
+          #     # Payload:
+          #     #   name: "Renne Jaskonis"
+          #   # Resource:
+          #   #   Fn::GetAtt: [hello, Arn]
+          #   End: true
+
+resources: # CloudFormation template syntax
+  Resources:
+    MyLambdaInvokeEvent:
+      Type: AWS::Events::Rule
+      Properties:
+        Name: every-two-min
+        Description: each time event
+        RoleArn: arn:aws:iam::255191296425:role/events
+        ScheduleExpression: rate(2 minutes)
+        State: ENABLED
+        Targets:
+          # - Arn: { "Fn::GetAtt": ["HelloLambdaFunction", "Arn" ] } # same thing as below
+          - Arn: 
+              Fn::GetAtt: ["WorldLambdaFunction", "Arn" ]  # Resource name following the principles as described here https://www.serverless.com/framework/docs/providers/aws/guide/resources
+            Id: "1"
+
+    StepFunctionsInvokeEvent:
+      Type: AWS::Events::Rule
+      Properties:
+        Name: every-five-min
+        Description: each time event
+        RoleArn: arn:aws:iam::255191296425:role/events
+        ScheduleExpression: rate(5 minutes)
+        State: ENABLED
+        Targets:
+          - Arn:
+              Fn::GetAtt: [ServerlessDashstateDashmachineDash1, Arn]
+            RoleArn: arn:aws:iam::255191296425:role/service-role/Amazon_EventBridge_Invoke_Step_Functions_105061699
+            Id: "1"
+
+    EventBridgeLambdaPermission:
+      Type: AWS::Lambda::Permission
+      Properties:
+        FunctionName: { "Fn::GetAtt": ["WorldLambdaFunction", "Arn" ] }
+        Action: lambda:InvokeFunction
+        Principal: events.amazonaws.com
+        SourceArn: { "Fn::GetAtt": ["MyLambdaInvokeEvent", "Arn" ] }

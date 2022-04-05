@@ -1,0 +1,31 @@
+// {
+//     "compilerOptions": {
+//         "target": "es6",
+//         "module": "commonjs",
+//         "outDir": "./dist",
+//         "rootDirs": ["./src"],
+//         "strict": true,
+//         "strictPropertyInitialization": false,
+//         "allowJs": true,
+//         "esModuleInterop": true,
+//         "experimentalDecorators": true,
+//         "emitDecoratorMetadata": true,
+//         "skipLibCheck": true,
+//         "forceConsistentCasingInFileNames": true,
+//         "resolveJsonModule": true,
+//         "baseUrl": "./src",
+//         "paths": {
+//             "@/*": ["./*"]
+//         }
+//     },
+//     "exclude": ["node_modules", "dist", "**/*.js", "**/*.json"]
+// }
+
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es5",
+        "esModuleInterop": true,
+        "moduleResolution": "node"
+    }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "hello-node-ts-lambda",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "prettier": {
+    "tabWidth": 4,
+    "printWidth": 160
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.6",
+    "serverless-plugin-typescript": "^2.1.0",
+    "typescript": "^4.4.4"
+  }
+}

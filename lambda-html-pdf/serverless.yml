@@ -1,0 +1,21 @@
+service: lambda-html-pdf
+
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: sa-east-1
+  lambdaHashingVersion: 20201221
+
+functions:
+  lambda-html-pdf:
+    name: lambda-html-pdf-${opt:stage}
+    handler: handler.run
+    layers:
+      - arn:aws:lambda:sa-east-1:699054759624:layer:phantom-js:3
+
+package:
+  patterns:
+    - "!/result.pdf"
+    # - '!node_modules/**'

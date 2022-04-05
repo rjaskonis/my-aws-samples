@@ -1,0 +1,17 @@
+{
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy:all:dev": "sls deploy --stage dev",
+    "deploy:all:prd": "sls deploy --stage prd",
+    "deploy:function:dev": "sls deploy function --function hello --stage dev",
+    "deploy:function:prd": "sls deploy function --function hello --stage prd",
+    "invoke:local": "sls invoke local --function hello --stage dev",
+    "invoke:dev": "sls invoke --function hello --stage dev",
+    "invoke:prd": "sls invoke --function hello --stage prd",
+    "start:dev": "sls offline start --stage dev"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "serverless-offline": "^8.2.0"
+  }
+}

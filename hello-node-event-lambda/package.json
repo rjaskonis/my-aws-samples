@@ -1,0 +1,16 @@
+{
+    "name": "hello-node-event-lambda",
+    "version": "1.0.0",
+    "description": "",
+    "main": "handler.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "prettier": {
+        "tabWidth": 4,
+        "printWidth": 160
+    }
+}

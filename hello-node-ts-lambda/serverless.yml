@@ -1,0 +1,20 @@
+service: hello-node-ts-lambda
+
+plugins:
+  - serverless-plugin-typescript
+
+frameworkVersion: '2'
+
+custom:
+  profiles:
+    serverless: deploy
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  profile: ${self:custom.profiles.serverless}
+
+functions:
+  hello:
+    handler: handler.hello

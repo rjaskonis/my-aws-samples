@@ -1,0 +1,20 @@
+{
+    "name": "hello-node-lambda-layers",
+    "version": "1.0.0",
+    "description": "",
+    "main": "handler.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "run:dev": "sls invoke local --function hello"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "prettier": {
+        "tabWidth": 4,
+        "printWidth": 160
+    },
+    "dependencies": {
+        "axios": "^0.24.0"
+    }
+}

@@ -1,0 +1,26 @@
+service: hello-node-express-api
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+
+plugins:
+  - serverless-offline
+
+functions:
+  lambda:
+    name: lambda-express-api-${opt:stage}
+    handler: lambda.handler
+    timeout: 300
+    memorySize: 128
+    events:
+      - http:
+          path: /{proxy+}
+          method: ANY
+          cors: true
+          # integration: lambda
+          # response:
+          #   headers:
+          #     Content-Type: "'text/plain'"

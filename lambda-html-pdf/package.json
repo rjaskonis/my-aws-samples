@@ -1,0 +1,21 @@
+{
+    "name": "lambda-html-pdf",
+    "version": "1.0.0",
+    "description": "",
+    "main": "handler.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "run:dev": "sls invoke local --function lambda-html-pdf",
+        "deploy:dev": "sls deploy function --function lambda-html-pdf --stage dev"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "prettier": {
+        "tabWidth": 4,
+        "printWidth": 160
+    },
+    "dependencies": {
+        "html-pdf": "^3.0.1"
+    }
+}

@@ -1,0 +1,31 @@
+{
+    "name": "lambda",
+    "version": "1.0.0",
+    "main": "handler.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "deploy:all:dev": "sls deploy --stage dev",
+        "deploy:all:prd": "sls deploy --stage prd",
+        "deploy:function:dev": "sls deploy function --function helloWorld --stage dev",
+        "deploy:function:prd": "sls deploy function --function helloWorld --stage prd",
+        "invoke:local": "sls invoke local --function helloWorld --stage dev",
+        "invoke:dev": "sls invoke --function helloWorld --stage dev",
+        "invoke:prd": "sls invoke --function helloWorld --stage prd",
+        "start:dev": "sls offline start --stage dev"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "prettier": {
+        "tabWidth": 4,
+        "printWidth": 160
+    },
+    "devDependencies": {
+        "serverless-offline": "^8.0.0",
+        "serverless-offline-ssm": "^5.2.0"
+    },
+    "dependencies": {
+        "dotenv": "^10.0.0"
+    },
+    "description": ""
+}

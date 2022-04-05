@@ -1,0 +1,24 @@
+{
+    "name": "hello-node-express-api",
+    "version": "1.0.0",
+    "description": "",
+    "main": "handler.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "run:local:dev": "clear && sls invoke local --function lambda --stage dev",
+        "run-offline:local:dev": "clear && sls offline start --stage dev"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "prettier": {
+        "tabWidth": 4,
+        "printWidth": 160
+    },
+    "dependencies": {
+        "aws-serverless-express": "^3.4.0",
+        "compression": "^1.7.4",
+        "express": "^4.17.2",
+        "serverless-offline": "^8.3.1"
+    }
+}

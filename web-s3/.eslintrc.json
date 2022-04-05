@@ -1,0 +1,24 @@
+{
+    "parser": "babel-eslint",
+    "env": {
+        "browser": true
+    },
+    "plugins": ["react", "jsx-a11y", "import"],
+    "rules": {
+        // "indent": ["error", 4],
+        "react/jsx-filename-extension": [
+            "error",
+            {
+                "extensions": [".js", ".jsx"]
+            }
+        ],
+        "global-require": "off",
+        "max-len": ["error", { "code": 145 }],
+        "no-unused-expressions": ["error", { "allowTaggedTemplates": true }],
+        "no-restricted-syntax": "off",
+        "import/prefer-default-export": "off",
+        "import/no-dynamic-require": "off",
+        "import/newline-after-import": "off",
+        "import/no-extraneous-dependencies": "off"
+    }
+}

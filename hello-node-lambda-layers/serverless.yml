@@ -1,0 +1,44 @@
+service: hello-node-lambda-layers
+
+frameworkVersion: "2"
+configValidationMode: error
+
+provider:
+    name: aws
+    runtime: nodejs12.x
+    region: sa-east-1
+    layers:
+        - arn:aws:lambda:sa-east-1:255191296425:layer:axios:1
+
+package:
+    individually: true
+    patterns:
+        - "!node_modules/**"
+        - "!nodejs/**"
+
+functions:
+    hello:
+        name: "hello-lambda-layer"
+        handler: handler.run
+        # layers:
+        #     - arn:aws:lambda:sa-east-1:255191296425:layer:axios:1
+        package:
+            patterns:
+                # - "!*" # must be first. Logic is: exclude everything, then include next
+                - "handler.js"
+                # - "!node_modules/**"
+                # - "!nodejs/**"
+
+    hello2:
+        name: "hello-lambda-layer-2"
+        handler: handler2.run
+        package:
+            patterns:
+                - "!*"
+                - "handler2.js"
+                # - "!node_modules/**"
+                # - "!nodejs/**"
+            # patterns:
+            #     - "!handler.js"
+            #     # - "!node_modules/**"
+            #     # - "!nodejs/**"

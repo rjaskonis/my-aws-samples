@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "invoke:dev": "clear && npx sls invoke local --function hello --stage dev"
+  },
+  "devDependencies": {
+    "serverless": "^2.72.2",
+    "serverless-offline": "^8.4.0",
+    "serverless-offline-ssm": "^5.2.0"
+  }
+}
