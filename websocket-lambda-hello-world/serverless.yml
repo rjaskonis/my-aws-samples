@@ -1,0 +1,23 @@
+service: websocket-lambda-hello-world
+
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  region: sa-east-1
+  runtime: nodejs14.x
+  memorySize: 128
+  timeout: 60
+
+package:
+  individually: true
+  patterns:
+    - "!*/**"
+
+functions:
+  websocket-lambda-hello-world:
+    name: websocket-lambda-hello-world-${opt:stage}
+    handler: lambda.handler
+    package:
+      patterns:
+        - "lambda.js"

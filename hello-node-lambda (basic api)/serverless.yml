@@ -7,7 +7,7 @@
 # The `service` block is the name of the service
 service: lambda
 
-frameworkVersion: "2"
+frameworkVersion: "3"
 
 custom:
   profiles:
@@ -19,9 +19,15 @@ provider:
   name: aws
   region: sa-east-1
   profile: ${self:custom.profiles.serverless}
+  runtime: nodejs14.x
   stage: ${opt:stage, 'dev'}
   environment:
     myvar: ${self:custom.var}
+
+package:
+  individually: true
+  patterns:
+    - "!node_modules/**"
 
 plugins:
   - serverless-offline
@@ -29,7 +35,6 @@ plugins:
 # The `functions` block defines what code to deploy
 functions:
   helloWorld:
-    runtime: nodejs12.x
     name: hello-world-basic-api-${opt:stage}
     handler: handler.helloWorld
     # The `events` block defines how to trigger the handler.helloWorld code
@@ -42,7 +47,6 @@ functions:
           cors: true
 
   helloWorld2:
-    runtime: nodejs14.x
     name: hello-world-2-basic-api-${opt:stage}
     handler: handler.helloWorld
     # The `events` block defines how to trigger the handler.helloWorld code
@@ -50,6 +54,6 @@ functions:
     memorySize: 128
     events:
       - http:
-          path: hello-world
+          path: hello-world-2
           method: get
           cors: true

@@ -1,0 +1,33 @@
+service: serverless-websocket-and-rest-api
+
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  region: sa-east-1
+  runtime: nodejs14.x
+  memorySize: 128
+  timeout: 60
+  websocketsApiName: ws-serverless-websocket-and-rest-api-1
+  websocketsApiRouteSelectionExpression: $request.body.action
+  websocketsDescription: Custom Serverless Websockets with Lambda 1
+
+package:
+  individually: true
+  patterns:
+    - "!*/**"
+
+functions:
+  lambda:
+    name: serverless-websocket-and-rest-api-1-${opt:stage}
+    handler: lambda.handler
+    package:
+      patterns:
+        - "lambda.js"
+    events:
+      - websocket:
+          route: $connect
+      - websocket:
+          route: $disconnect
+      - websocket:
+          route: message

@@ -1,0 +1,20 @@
+{
+    "name": "websocket-lambda-hello-world",
+    "version": "1.0.0",
+    "description": "",
+    "main": "handler.js",
+    "prettier": {
+        "tabWidth": 4,
+        "printWidth": 120
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "invoke:dev:local": "sls invoke local -f websocket-lambda-hello-world --stage dev"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "ws": "^8.5.0"
+    }
+}
