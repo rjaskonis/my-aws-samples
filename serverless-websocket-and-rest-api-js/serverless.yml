@@ -22,6 +22,7 @@ package:
 functions:
   lambda:
     name: serverless-websocket-and-rest-api-1-${opt:stage}
+    role: arn:aws:iam::420121668682:role/ws-serverless-websocket-and-rest-api-1
     handler: lambda.handler
     package:
       patterns:

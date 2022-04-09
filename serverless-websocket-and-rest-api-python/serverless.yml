@@ -1,0 +1,52 @@
+service: sls-ws-rest-api-python
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  region: sa-east-1
+  runtime: python3.8
+  memorySize: 128
+  timeout: 30
+  httpApi:
+    cors: true
+  websocketsApiName: ws-sls-ws-rest-api-python
+  websocketsApiRouteSelectionExpression: $request.body.action
+
+package:
+  individually: true
+  patterns:
+    - "!*/**"
+
+plugins:
+  - serverless-offline
+
+functions:
+  fn:
+    name: sls-ws-rest-api-python-${opt:stage}
+    handler: handler.run
+    events:
+      - httpApi:
+          method: GET
+          path: /
+      - websocket:
+          route: $connect
+      - websocket:
+          route: $disconnect
+      - websocket:
+          route: message
+    package:
+      patterns:
+        - "handler.py"
+        - "index.html"
+    environment:
+      WS_ENDPOINT:
+        Fn::Join:
+          - ""
+          - - Ref: WebsocketsApi
+            - .execute-api.
+            - Ref: AWS::Region
+            - .amazonaws.com/
+            - ${opt:stage}
+      
+          

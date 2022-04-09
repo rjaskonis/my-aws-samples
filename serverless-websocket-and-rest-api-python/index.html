@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Lambda - Python</title>
+    </head>
+    <body>
+        <h4>Hello from python Lambda!</h4>
+        <br>
+        <button>Get another message</button>
+        <br>
+        <hr />
+        <div>
+            <p>Message received:</p>
+            <code></code>
+        </div>
+        <script>
+            const endpointUrl = "{endpointUrl}";
+            const socket = new WebSocket(endpointUrl);
+
+            socket.onopen = (e) => {
+                console.log("open");
+                socket.send(JSON.stringify({ action: "message" }));
+            };
+
+            socket.onmessage = (e) => {
+                console.log(`Message received from server: ${JSON.stringify(e.data)}`);
+
+                document.querySelector("code").innerHTML = e.data;
+            };
+
+            const button = document.querySelector("button");
+
+            button.addEventListener("click", e => {
+                socket.send(JSON.stringify({ action: "message", data:"different" }));
+            })
+        </script>
+    </body>
+</html>

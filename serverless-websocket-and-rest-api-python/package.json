@@ -1,0 +1,10 @@
+{
+    "prettier": {
+        "tabWidth": 4,
+        "printWidth": 160
+    },
+    "devDependencies": {
+        "serverless-export-env": "^2.1.0",
+        "serverless-offline": "^8.5.0"
+    }
+}

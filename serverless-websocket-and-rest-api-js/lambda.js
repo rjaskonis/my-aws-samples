@@ -41,7 +41,7 @@ async function handler(event, context, callback) {
                 await apig
                     .postToConnection({
                         ConnectionId: connectionId,
-                        Data: Buffer.from("Hello from server. Used serverless framework to create this one"),
+                        Data: Buffer.from("Hello from server using serverless, right!?"),
                     })
                     .promise();
 
