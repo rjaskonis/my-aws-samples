@@ -1,6 +1,7 @@
 import os
 import json
 import boto3
+from time import sleep
 
 
 def run(event, context):
@@ -49,7 +50,10 @@ def run(event, context):
 
             if data != None:
                 apigm.post_to_connection(
-                    ConnectionId=connectionId, Data=b"Hello again! I'm some other message")
+                    ConnectionId=connectionId, Data=b"Hello again! I'm some other message. Wait a bit!")
+                sleep(4)
+                apigm.post_to_connection(
+                    ConnectionId=connectionId, Data=b"Final hello! I'm done for now.")                
             else:
                 apigm.post_to_connection(
                     ConnectionId=connectionId, Data=b"Hello from server running python")
